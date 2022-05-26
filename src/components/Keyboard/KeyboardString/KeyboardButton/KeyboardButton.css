@@ -1,0 +1,28 @@
+.keyboard-button {
+    background-color: lightgray;
+    border: none;
+    user-select: none;
+
+    transition: all 100ms ease-out;
+    font-size: 1.2em;
+
+
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    padding: 5% 5px;
+    text-transform: uppercase;
+}
+
+.keyboard-button:active {
+    background-color: darkgray;
+    transform: translateY(2px);
+}
+
+.guessed-key {
+    background: green;
+}
+
+.wrong-key {
+    background: darkgray;
+}
