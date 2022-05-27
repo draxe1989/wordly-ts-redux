@@ -1,0 +1,5 @@
+.grid-string {
+    display: flex;
+    gap: 2vw;
+    height: 100%;
+}
