@@ -1,14 +1,18 @@
 import React, {FC} from 'react';
 import GridCell from "./GridCell/GridCell";
 import './GridString.css'
+import {GridStringType} from "../../../types";
 
-const GridString :FC= () => {
-    let arr: number[] = [1,2,3,4,5]
+type props = {
+    gridString: GridStringType
+}
+
+const GridString :FC<props>= ({gridString}) => {
 
 
     return (
         <div className={'grid-string'}>
-            {arr.map(cell=><GridCell key={cell + 'cell'} letter={cell+''} guessed={""}/>)}
+            {gridString.map(gridCell=><GridCell key={gridCell.letter + 'cell'} gridCell={gridCell}/>)}
         </div>
     );
 };

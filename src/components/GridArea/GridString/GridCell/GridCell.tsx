@@ -1,15 +1,15 @@
 import React, {FC} from 'react';
 import './GridCell.css'
+import {GridCellType} from "../../../../types";
 
-type GridCellProps = {
-    letter: string,
-    guessed: 'guessed-cell' | 'wrong-order-cell' | 'wrong-cell' | ''
+type props = {
+    gridCell: GridCellType
 }
 
-const GridCell: FC<GridCellProps> = ({letter, guessed}) => {
+const GridCell: FC<props> = ({gridCell}) => {
     return (
-        <div className={`grid-cell ${guessed}`}>
-            {letter}
+        <div className={`grid-cell ${gridCell.guessed}`}>
+            {gridCell.letter}
         </div>
     )
 };
