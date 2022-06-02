@@ -1,6 +1,7 @@
 export type GridCellType = {
     letter: string,
-    guessed: 'guessed-cell' | 'wrong-order-cell' | 'wrong-cell' | ''
+    guessed: 'guessed-cell' | 'wrong-order-cell' | 'wrong-cell' | '',
+    id: number
 }
 
 export type GridStringType = [GridCellType, GridCellType, GridCellType, GridCellType, GridCellType]

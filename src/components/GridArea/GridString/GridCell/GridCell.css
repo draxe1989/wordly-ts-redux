@@ -26,6 +26,6 @@
     background: var(--wrong-order-color);
 }
 
-.wong-cell {
+.wrong-cell {
     background: var(--wrong-letter-color);
 }

@@ -12,7 +12,7 @@ const GridString :FC<props>= ({gridString}) => {
 
     return (
         <div className={'grid-string'}>
-            {gridString.map(gridCell=><GridCell key={gridCell.letter + 'cell'} gridCell={gridCell}/>)}
+            {gridString.map(gridCell=><GridCell key={gridCell.id} gridCell={gridCell}/>)}
         </div>
     );
 };
