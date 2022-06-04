@@ -2,8 +2,8 @@ import React from 'react';
 import Keyboard from "./components/Keyboard/Keyboard";
 import GridArea from "./components/GridArea/GridArea";
 import {useDispatch, useSelector} from "react-redux";
-import {addAttemptAC, delLetterAC, state, writeLetterAC} from "./store/store";
-import {GridAreaType} from "./types";
+import {addAttemptAC, delLetterAC, writeLetterAC} from "./store/store";
+import {GridAreaType, state} from "./types";
 
 function App() {
     const dispatch = useDispatch();

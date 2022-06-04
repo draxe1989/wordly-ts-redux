@@ -14,6 +14,7 @@
     font-family: Rubik, sans-serif;
     font-weight: bolder;
     font-size: 30px;
+    text-transform: uppercase;
 
     transition: all 500ms ease;
 }
