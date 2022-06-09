@@ -3,16 +3,16 @@ import Keyboard from "./components/Keyboard/Keyboard";
 import GridArea from "./components/GridArea/GridArea";
 import {useDispatch, useSelector} from "react-redux";
 import {addAttemptAC, delLetterAC, writeLetterAC} from "./store/store";
-import {GridAreaType, state} from "./types";
+import {GridAreaType, KeyboardType, state} from "./types";
 
 function App() {
     const dispatch = useDispatch();
     const logButton = (letter: string): void => {
         switch (letter) {
-            case 'Delete':
+            case '-':
                 dispatch(delLetterAC())
                 break
-            case 'Enter':
+            case '+':
                 dispatch(addAttemptAC())
                 break
             default:
@@ -23,11 +23,12 @@ function App() {
 
     const gridArea = useSelector((state : state) : GridAreaType => state.grid)
 
+    const keyboard = useSelector((state:state): KeyboardType =>state.keyboard)
 
     return (
         <div>
             <GridArea gridArea={gridArea}/>
-            <Keyboard callback={logButton}/>
+            <Keyboard keyboard = {keyboard} callback={logButton}/>
         </div>
     );
 }

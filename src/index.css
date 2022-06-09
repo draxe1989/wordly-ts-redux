@@ -13,3 +13,15 @@ body {
 * {
     box-sizing: border-box;
 }
+
+.guessed-cell {
+    background: var(--guessed-color);
+}
+
+.wrong-order-cell {
+    background: var(--wrong-order-color);
+}
+
+.wrong-cell {
+    background: var(--wrong-letter-color);
+}

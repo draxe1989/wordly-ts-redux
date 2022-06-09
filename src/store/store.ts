@@ -1,9 +1,10 @@
 import {createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
-import {GridAreaType, GridCellType, GridStringType, Keyboard, state} from "../types";
+import {GridAreaType, GridCellType, GridStringType, KeyboardType, state} from "../types";
 
-const wordАrray = ['гонка', 'шлюха', 'понос', 'гомно', 'казак', 'стопа']
-const xxx = 'гонка'
+
+const wordArray = ['гонка', 'шлюха', 'понос', 'гомно', 'казак', 'стопа', 'холоп', 'голоп']
+const xxx = 'голоп'
 
 
 const createGridArea = (): GridAreaType => {
@@ -28,7 +29,7 @@ const createGridArea = (): GridAreaType => {
     ]
 }
 
-const createKeyboard = () : Keyboard => {
+const createKeyboard = (): KeyboardType => {
     let str = 'йцукенгшщзхъ фывапролджэ -ячсмитьбю+'
     return str.split(' ').map(item => {
         return item.split('').map(val => {
@@ -40,6 +41,15 @@ const createKeyboard = () : Keyboard => {
     })
 }
 
+const paintKeyboard = (letter: GridCellType, keyboard: KeyboardType): void => {
+    for (let i = 0; i < keyboard.length; i++) {
+        for (let j = 0; j < keyboard[i].length; j++) {
+            if (keyboard[i][j].letter === letter.letter && keyboard[i][j].guessed !== 'guessed-cell') {
+                keyboard[i][j].guessed = letter.guessed
+            }
+        }
+    }
+}
 
 
 const ADD_LETTER = 'ADD_LETTER'
@@ -78,28 +88,54 @@ const reducer = (state: state = initialState, action: { type: string, payload?: 
             } else return state
 
         case ADD_ATTEMPT:
-            let word = state.grid[state.currentString].map(letter => letter.letter).join('')
-            if (wordАrray.find(item => item === word) && !state.attempts.find(item => item === word)) {
-                const string: GridStringType = JSON.parse(JSON.stringify(state.grid[state.currentString]))
-                word.split('').forEach((item, i) => {
-                    if (xxx[i] === word[i]) {
+            const attempts = state.attempts
+            const word:string = state.grid[state.currentString].reduce((acc,item)=>(acc+item.letter),'')
+            console.log(attempts)
+            if (wordArray.includes(word) && !attempts.includes(word)) {
+                const newState = {...state}
+                newState.grid = [...state.grid]
+                newState.grid[state.currentString] = [...state.grid[state.currentString]]
+                for (let i = 0; i < newState.grid[state.currentString].length; i++) {
+                    newState.grid[state.currentString][i] = {...state.grid[state.currentString][i]}
+                }
+                const string =  newState.grid[state.currentString]
+                const keyboard = [...state.keyboard].map(item=>[...item].map(val=>({...val})))
+                for (let i = 0; i < string.length; i++) {
+                    if (string[i].letter === xxx[i]) {
+                        // ЕСЛИ БУКВА ЕСТЬ на том же месте, ТО ПОКРаСИТЬ В ЗЕЛЕНЫЙ
                         string[i].guessed = 'guessed-cell'
-                    } else if (xxx.includes(word[i])) {
+                        paintKeyboard(string[i], keyboard)
+                    } else if (!xxx.includes(string[i].letter)) {
+                        string[i].guessed = 'wrong-cell'
+                        paintKeyboard(string[i], keyboard)
+                        // ЕСЛИ буквы нет в слове, ТО ПОКРВСИТЬ В серый или  Угаданных букв не меньше чем этих букв в слове то в желтый
+                    }
+                }
+                for (let i = 0; i < string.length; i++) {
+                    const howThisLetterIsGuessed = string.filter(item=> (item.letter === string[i].letter) && (item.guessed ==='guessed-cell' || item.guessed === 'wrong-order-cell')).length
+                    const howThisLetterInXXX = xxx.split('').filter(item=>item === string[i].letter).length
+
+                    if (xxx.includes(string[i].letter) && (howThisLetterInXXX > howThisLetterIsGuessed) && !(string[i].guessed === 'guessed-cell')) {
                         string[i].guessed = 'wrong-order-cell'
-                    } else {
+                        paintKeyboard(string[i], keyboard)
+                    } else if (xxx.includes(string[i].letter) && (howThisLetterInXXX === howThisLetterIsGuessed) && !(string[i].guessed === 'guessed-cell')) {
+                        string[i].guessed = 'wrong-order-cell'
+                        paintKeyboard(string[i], keyboard)
                         string[i].guessed = 'wrong-cell'
                     }
-                })
-                let newState = {...state}
-                newState.grid = [...state.grid]
-                newState.grid[state.currentString] = string
-                return {
-                    ...state,
-                    grid: newState.grid,
-                    attempts: [...state.attempts, word],
-                    currentString: state.currentString + 1,
-                    stringCounter: 0
                 }
+
+                newState.keyboard = keyboard
+                newState.currentString ++ // переход на следующую строку
+                newState.stringCounter = 0 // обнуление счетчка букв
+                newState.attempts = [...state.attempts, string.map(item=>item.letter).join('')] // добавление слова в массив попыток
+
+
+
+
+
+
+                return newState
             } else return state
         default:
             return state

@@ -20,24 +20,3 @@
     transform: translateY(2px);
     box-shadow: none;
 }
-
-.guessed-letter {
-    pointer-events: none;
-    background: var(--guessed-color);
-    transform: translateY(2px);
-    box-shadow: none;
-}
-
-.wrong-order {
-    pointer-events: none;
-    background: var(--wrong-order-color);
-    transform: translateY(2px);
-    box-shadow: none;
-}
-
-.wrong-letter {
-    pointer-events: none;
-    background: var(--wrong-letter-color);
-    transform: translateY(2px);
-    box-shadow: none;
-}
