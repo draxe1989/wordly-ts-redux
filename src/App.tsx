@@ -4,6 +4,7 @@ import GridArea from "./components/GridArea/GridArea";
 import {useDispatch, useSelector} from "react-redux";
 import {addAttemptAC, delLetterAC, writeLetterAC} from "./store/store";
 import {GridAreaType, KeyboardType, state} from "./types";
+import Modal from "./components/Modal/Modal";
 
 function App() {
     const dispatch = useDispatch();
@@ -21,6 +22,10 @@ function App() {
         }
     }
 
+    const modal = () => {
+        console.log("модалка")
+    }
+
     const gridArea = useSelector((state : state) : GridAreaType => state.grid)
 
     const keyboard = useSelector((state:state): KeyboardType =>state.keyboard)
@@ -29,6 +34,7 @@ function App() {
         <div>
             <GridArea gridArea={gridArea}/>
             <Keyboard keyboard = {keyboard} callback={logButton}/>
+            <Modal callback={modal} header={"заголовок модалки"} text={'тест модалки'}/>
         </div>
     );
 }
