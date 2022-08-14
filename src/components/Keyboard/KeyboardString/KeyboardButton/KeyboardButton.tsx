@@ -25,4 +25,4 @@ const KeyboardButton: FC<KeyboardButtonProps> = ({guessed, title, callback}) => 
     );
 };
 
-export default React.memo(KeyboardButton);
+export default React.memo(KeyboardButton, (a, b)=> (a.guessed === b.guessed && a.title === b.title));
