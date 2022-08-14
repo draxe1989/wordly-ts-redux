@@ -7,6 +7,8 @@ type props = {
 }
 
 const GridCell: FC<props> = ({gridCell}) => {
+
+    console.log('cell')
     return (
         <div className={`grid-cell ${gridCell.guessed}`}>
             {gridCell.letter}
@@ -14,4 +16,4 @@ const GridCell: FC<props> = ({gridCell}) => {
     )
 };
 
-export default GridCell;
+export default React.memo(GridCell);

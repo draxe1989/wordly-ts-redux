@@ -17,4 +17,4 @@ const Keyboard: FC<KeyboardProps> = ({callback , keyboard}) => {
     );
 };
 
-export default Keyboard;
+export default React.memo(Keyboard);

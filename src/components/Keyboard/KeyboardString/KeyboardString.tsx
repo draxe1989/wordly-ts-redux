@@ -19,4 +19,4 @@ const KeyboardString : FC<KeyboardStringProps> = ({arr, callback}) => {
     );
 };
 
-export default KeyboardString;
+export default React.memo(KeyboardString);
