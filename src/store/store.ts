@@ -6,7 +6,6 @@ import words, {hiddenWord} from "../data/words";
 const wordArray = words
 const xxx = hiddenWord
 
-
 const createGridArea = (): GridAreaType => {
     const createGridstring = (): GridStringType => {
         const createCellObj = (): GridCellType => {
