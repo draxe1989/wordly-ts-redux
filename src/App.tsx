@@ -24,17 +24,13 @@ function App() {
     }
     const closeModal = () => dispatch(closeModalAC())
     const gridArea = useSelector((state : state) : GridAreaType => state.grid)
-
     const keyboard = useSelector((state:state): KeyboardType =>state.keyboard)
-
     const modal = useSelector((state:state): ModalType =>state.modal)
-
-
-
+    const currentString = useSelector((state:state): number =>state.currentString)
     return (
         <div className='container'>
             <GridArea gridArea={gridArea}/>
-            <Keyboard keyboard = {keyboard} callback={logButton}/>
+            <Keyboard keyboard = {keyboard} callback={logButton} currentString={currentString}/>
             {modal.visible && <Modal callback={closeModal} header={modal.header} text={modal.text}/>}
         </div>
     );

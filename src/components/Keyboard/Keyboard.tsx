@@ -5,11 +5,11 @@ import {KeyboardType} from "../../types";
 
 type KeyboardProps = {
     callback: (letter:string)=>void,
-    keyboard: KeyboardType
+    keyboard: KeyboardType,
+    currentString: number
 }
 
 const Keyboard: FC<KeyboardProps> = ({callback , keyboard}) => {
-
     return (
         <div className={'keyboard'}>
             {keyboard.map((string, i)=><KeyboardString key={i + 'string'} arr={string} callback={callback}/>) }
@@ -17,4 +17,4 @@ const Keyboard: FC<KeyboardProps> = ({callback , keyboard}) => {
     );
 };
 
-export default React.memo(Keyboard);
+export default React.memo(Keyboard, (a,b)=>(a.currentString === b.currentString));

@@ -8,7 +8,6 @@ type props = {
 }
 
 const GridArea: FC<props> = ({gridArea}) => {
-
     return (
         <div className={'grid-area'}>
             {gridArea.map((gridString, i) => <GridString key={i + ' gridString'} gridString={gridString}/>)}
@@ -16,4 +15,4 @@ const GridArea: FC<props> = ({gridArea}) => {
     );
 };
 
-export default GridArea;
+export default React.memo(GridArea);

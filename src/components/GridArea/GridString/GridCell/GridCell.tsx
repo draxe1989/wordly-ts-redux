@@ -7,8 +7,6 @@ type props = {
 }
 
 const GridCell: FC<props> = ({gridCell}) => {
-
-    console.log('cell')
     return (
         <div className={`grid-cell ${gridCell.guessed}`}>
             {gridCell.letter}

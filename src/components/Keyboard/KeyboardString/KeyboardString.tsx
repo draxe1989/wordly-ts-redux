@@ -9,9 +9,6 @@ type KeyboardStringProps = {
 }
 
 const KeyboardString : FC<KeyboardStringProps> = ({arr, callback}) => {
-
-
-
     return (
         <div className={'keyboard-string'}>
             {arr.map(letter=><KeyboardButton key={letter.letter} guessed={letter.guessed} title={letter.letter} callback={callback}/>)}

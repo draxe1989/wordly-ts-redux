@@ -8,8 +8,6 @@ type props = {
 }
 
 const GridString :FC<props>= ({gridString}) => {
-
-
     return (
         <div className={'grid-string'}>
             {gridString.map(gridCell=><GridCell key={gridCell.id} gridCell={gridCell}/>)}
@@ -17,4 +15,4 @@ const GridString :FC<props>= ({gridString}) => {
     );
 };
 
-export default GridString;
+export default React.memo(GridString);
