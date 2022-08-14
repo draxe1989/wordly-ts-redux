@@ -13,6 +13,7 @@ const KeyboardButton: FC<KeyboardButtonProps> = ({guessed, title, callback}) => 
         e.preventDefault()
         callback(title)
     }
+    console.log('button')
 
     return (
         <div className={`keyboard-button ${guessed}`}

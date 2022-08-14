@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addAttemptAC, closeModalAC, delLetterAC, writeLetterAC} from "./store/store";
 import {GridAreaType, KeyboardType, ModalType, state} from "./types";
 import Modal from "./components/Modal/Modal";
+import './App.css'
 
 function App() {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function App() {
 
 
     return (
-        <div>
+        <div className='container'>
             <GridArea gridArea={gridArea}/>
             <Keyboard keyboard = {keyboard} callback={logButton}/>
             {modal.visible && <Modal callback={closeModal} header={modal.header} text={modal.text}/>}
