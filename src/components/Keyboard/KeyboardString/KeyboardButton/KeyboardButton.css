@@ -1,5 +1,7 @@
 .keyboard-button {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     padding: 5% 0;
     color: black;

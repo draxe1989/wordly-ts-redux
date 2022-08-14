@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {MouseEvent, FC} from 'react';
 import './KeyboardButton.css'
 
 
@@ -9,13 +9,18 @@ type KeyboardButtonProps = {
 }
 
 const KeyboardButton: FC<KeyboardButtonProps> = ({guessed, title, callback}) => {
+    const onButtonHandler = (e: MouseEvent): void => {
+        e.preventDefault()
+        callback(title)
+    }
+
     return (
-        <button className={`keyboard-button ${guessed}`}
-                onPointerDown={() => callback(title)}>
+        <div className={`keyboard-button ${guessed}`}
+                onPointerDown={onButtonHandler}>
             {title === '-' ? <div style={{paddingLeft: '5px', paddingRight: '5px'}}>&#128281;</div>
                 : title === '+' ? <div style={{paddingLeft: '10px', paddingRight: '10px'}}>&#9094;</div>
                     : title}
-        </button>
+        </div>
     );
 };
 
