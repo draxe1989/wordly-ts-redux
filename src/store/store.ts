@@ -1,10 +1,10 @@
 import {createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {GridAreaType, GridCellType, GridStringType, KeyboardType, state} from "../types";
-import words from "../data/words";
+import words, {hiddenWord} from "../data/words";
 
 const wordArray = words
-const xxx = 'почка'
+const xxx = hiddenWord
 
 
 const createGridArea = (): GridAreaType => {
