@@ -55,18 +55,25 @@ const paintKeyboard = (letter: GridCellType, keyboard: KeyboardType): void => {
 const ADD_LETTER = 'ADD_LETTER'
 const DEL_LETTER = 'DEL_LETTER'
 const ADD_ATTEMPT = 'ADD_ATTEMPT'
+const CLOSE_MODAL = 'CLOSE_MODAL'
 
 const initialState: state = {
     currentString: 0,
     stringCounter: 0,
     attempts: [],
     grid: createGridArea(),
-    keyboard: createKeyboard()
+    keyboard: createKeyboard(),
+    modal: {
+        visible: false,
+        header: 'test',
+        text: 'test',
+    }
 }
 
 const reducer = (state: state = initialState, action: { type: string, payload?: any }): state => {
     switch (action.type) {
         case ADD_LETTER:
+            if (state.currentString === 6) return state
             if (state.stringCounter < 5) {
                 const newState = {...state}
                 newState.grid = [...state.grid]
@@ -77,6 +84,7 @@ const reducer = (state: state = initialState, action: { type: string, payload?: 
                 return newState
             } else return state
         case DEL_LETTER:
+            if (state.currentString === 6) return state
             if (state.stringCounter > 0) {
                 const newState = {...state}
                 newState.stringCounter--
@@ -126,8 +134,16 @@ const reducer = (state: state = initialState, action: { type: string, payload?: 
                 newState.currentString ++ // переход на следующую строку
                 newState.stringCounter = 0 // обнуление счетчика букв
                 newState.attempts = [...attempts, word] // добавление слова в массив попыток
+                if (xxx === word) return {...newState, modal: { visible: true, text: 'Вы угадали слово!', header: 'Победа!'}}
+                if (newState.currentString === 6) return {...newState, modal: { visible: true, text: `К сожалению, вы проиграли. Загаданное слово - ${xxx}`, header: 'Поражение!'}}
                 return newState
+            } else if(attempts.includes(word)) {
+                return {...state, modal: { visible: true, text: 'Такое слово уже было', header: 'Ошибка'}}
+            } else if (!wordArray.includes(word)) {
+                return {...state, modal: { visible: true, text: 'Такого слова нет в словаре', header: 'Ошибка'}}
             } else return state
+        case CLOSE_MODAL:
+            return {...state, modal: {...state.modal, visible: false}}
         default:
             return state
     }
@@ -136,5 +152,6 @@ const reducer = (state: state = initialState, action: { type: string, payload?: 
 export const writeLetterAC = (payload: string) => ({type: ADD_LETTER, payload})
 export const delLetterAC = () => ({type: DEL_LETTER})
 export const addAttemptAC = () => ({type: ADD_ATTEMPT})
+export const closeModalAC = () => ({type: CLOSE_MODAL})
 
 export const store = createStore(reducer, composeWithDevTools());
