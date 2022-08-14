@@ -4,10 +4,18 @@
     --wrong-letter-color: #7a7a7a;
     --keyboard-color: lightgray;
 }
+html {
+    height: 100%;
+}
 
 body {
     padding: 0;
     margin: 0;
+    height: 100%;
+}
+
+#root {
+    height: 100%;
 }
 
 * {

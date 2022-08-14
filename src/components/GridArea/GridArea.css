@@ -1,6 +1,6 @@
 .grid-area {
     width: 100%;
-    height: 55vh;
+    height: 60%;
     display: flex;
     flex-direction: column;
     gap: 2vw;
